@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+  
+defaults:
+  run:
+    working-directory: ./TypeScript
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node with Version 16.13.0
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: "16.13.0"
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Precompile
+        run: npm run precompile
+        
+      - name: Compile TSC
+        run: npm run compile
+        
+      - name: Run Unit Tests with Jest
+        run: npm run test:jest
