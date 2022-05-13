@@ -13,7 +13,7 @@ namespace CSharpCore.Test
             GildedRose app = new GildedRose(Items);
             app.UpdateQuality();
 
-            Items[0].Name.Should().Be("foo");
+            Items[0].Name.Should().Be("fix me");
         }
 
     }
